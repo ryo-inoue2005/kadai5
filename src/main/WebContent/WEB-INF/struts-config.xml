@@ -89,7 +89,6 @@
 
 	<action-mappings>
 		<!-- Default "Welcome" action -->
-		<!-- Forwards to Welcome.jsp -->
 		<!-- ウェルカムアクション -->
 		<action 
 			path="/form" 
@@ -100,9 +99,9 @@
 			path="/result" 
 			type="action.ResultAction"
 			name="omikujiForm"
-            scope="request"
-            validate="true"
-            input="/pages/formView.jsp">
+			scope="request"
+			validate="true"
+			input="/pages/formView.jsp">
       		<forward 
       			name="result" 
       			path="/pages/resultView.jsp" />
@@ -110,21 +109,21 @@
     	
     	<!-- 過去半年の結果リスト画面表示 -->
     	<action 
-			path="/pastList" 
-			type="action.PastListAction">
-      		<forward 
-      			name="pastList"
-      			path="/pages/pastListView.jsp" />
+    		path="/pastList" 
+    		type="action.PastListAction">
+    		<forward 
+    		name="pastList"
+    		path="/pages/pastListView.jsp" />
     	</action>
     	
     	<!-- 過去半年の統計表示画面 -->
-    	 <action 
-			path="/stats" 
-			type="action.StatsAction">
-      		<forward 
-      			name="stats"
-      			path="/pages/statsView.jsp" />
-    	</action>
+		<action 
+		path="/stats" 
+		type="action.StatsAction">
+		<forward 
+			name="stats"
+			path="/pages/statsView.jsp" />
+		</action>
 		
 		
 
