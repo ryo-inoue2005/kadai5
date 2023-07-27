@@ -58,19 +58,19 @@
     end sample -->
     
     <!-- おみくじ結果Beanの設定 -->
-	<form-bean 
-      name="resultForm" 
-      type="form.ResultForm"/>
+    <form-bean 
+    	name="resultForm" 
+    	type="form.ResultForm"/>
       
      <!-- 過去のおみくじ結果Beanの設定 -->
      <form-bean 
-      name="pastListForm" 
-      type="form.PastListForm"/>
+     	name="pastListForm" 
+     	type="form.PastListForm"/>
       
      <!-- 運勢結果の割合Beanの設定 -->
      <form-bean 
-      name="statsForm" 
-      type="form.StatsForm"/>
+     	name="statsForm" 
+     	type="form.StatsForm"/>
       
 	</form-beans>
 	
@@ -137,17 +137,17 @@
     		type="action.PastListAction"
     		name="pastListForm"
     		scope="request">
-    		<forward 
+    	<forward 
     		name="pastList"
     		path="/pages/pastListView.jsp" />
     	</action>
     	
     	<!-- 過去半年の統計表示画面 -->
 		<action 
-		path="/stats" 
-		type="action.StatsAction"
-		name="statsForm"
-		scope="request">
+			path="/stats" 
+			type="action.StatsAction"
+			name="statsForm"
+			scope="request">
 		<forward 
 			name="stats"
 			path="/pages/statsView.jsp" />
