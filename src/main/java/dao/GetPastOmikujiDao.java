@@ -3,15 +3,16 @@ package dao;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import common.ConvertData;
 import common.DataBaseAcess;
-import dto.PastListDto;
+import omikuji.Omikuji;
+import omikuji.OmikujiFactory;
 
 /**
  * GetPastOmikujiDaoクラス. <br>
@@ -31,9 +32,9 @@ public class GetPastOmikujiDao {
 	 * @throws ClassNotFoundException クラス未発見例外
 	 * @throws SQLException SQL例外
 	 * @param birthday 誕生日
-	 * @return List<PastListDto> おみくじDTOリスト
+	 * @return List<Omikuji> おみくじリスト
 	 */
-	public List<PastListDto> getLastSixMonthsList(String birthday) throws ClassNotFoundException, SQLException {
+	public List<Omikuji> getLastSixMonthsList(String birthday) throws ClassNotFoundException, SQLException {
 
 		ResultSet resultSet = null;
 
@@ -58,17 +59,17 @@ public class GetPastOmikujiDao {
 
 			// SQL実行
 			resultSet = dba.select();
-			List<PastListDto> list = new ArrayList<>();
 
-			// dtoに格納
+			List<Omikuji> list = new LinkedList<>();
+
+			// リストに格納
 			while (resultSet.next()) {
-				PastListDto dto = new PastListDto();
-				dto.setCreateDate(resultSet.getDate("create_date").toString());
-				dto.setUnsei(resultSet.getString("unsei_name"));
-				dto.setNegaigoto(resultSet.getString("negaigoto"));
-				dto.setAkinai(resultSet.getString("akinai"));
-				dto.setGakumon(resultSet.getString("gakumon"));
-				list.add(dto);
+				Omikuji omikuji = OmikujiFactory.create(resultSet.getString("unsei_name"),
+						resultSet.getString("negaigoto"),
+						resultSet.getString("akinai"), resultSet.getString("gakumon"));
+
+				omikuji.setCreateDate(resultSet.getString("create_date"));
+				list.add(omikuji);
 			}
 
 			return list;
@@ -100,33 +101,28 @@ public class GetPastOmikujiDao {
 			dba.open();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT ROUND(CAST(CAST(COUNT(o.omikuji_code) as float) / ");
+			sql.append("SELECT u.unsei_name , ROUND(CAST(CAST(COUNT(o.omikuji_code) as float) / ");
 			sql.append("(SELECT COUNT(omikuji_code) FROM result) * 100 as numeric),1) as RATIO ");
 			sql.append("FROM unseimaster AS u ");
 			sql.append("INNER JOIN omikuji AS o ON u.unsei_code = o.unsei_code ");
 			sql.append("INNER JOIN result AS r ON o.omikuji_code = r.omikuji_code ");
 			sql.append("WHERE r.create_date ");
 			sql.append("BETWEEN ? AND CURRENT_DATE ");
-			sql.append("AND u.unsei_name = ? ");
+			sql.append("GROUP BY u.unsei_name ");
+			sql.append("ORDER BY RATIO DESC ");
 
 			// SQLをセット
 			dba.setSql(sql.toString());
 			dba.setData(1, getHalfYearAgo());
 
-			String[] unseiArray = { "大吉", "吉", "中吉", "小吉", "末吉", "凶" };
+			// SQL実行
+			resultSet = dba.select();
+
 			Map<String, Double> unseiMap = new LinkedHashMap<>();
 
-			// 運勢ごとに割合を格納
-			for (String unsei : unseiArray) {
-
-				dba.setData(2, unsei);
-				resultSet = dba.select();
-
-				if (resultSet.next()) {
-					unseiMap.put(unsei, resultSet.getDouble("RATIO"));
-				}
+			while (resultSet.next()) {
+				unseiMap.put(resultSet.getString("unsei_name"), resultSet.getDouble("RATIO"));
 			}
-
 			return unseiMap;
 
 		} finally {

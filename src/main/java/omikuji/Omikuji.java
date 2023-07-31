@@ -9,6 +9,8 @@ package omikuji;
  */
 public abstract class Omikuji implements Fortune {
 
+	/** 登録日を表します */
+	protected String createDate;
 	/** 運勢を表します */
 	protected String unsei;
 	/** 願い事を表します */
@@ -17,6 +19,20 @@ public abstract class Omikuji implements Fortune {
 	protected String akinai;
 	/** 学問を表します */
 	protected String gakumon;
+
+	/**
+	 * 登録日の取得
+	 */
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	/**
+	 * 登録日のセット
+	 */
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 
 	/**
 	 * 運勢の取得

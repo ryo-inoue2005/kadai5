@@ -17,10 +17,11 @@
 
 	<h1>運勢結果</h1>
 	
-	<p><bean:write name="resultForm" property="disp" scope="request" /></p>
-	<p>願い事：<bean:write name="resultForm" property="negaigoto" scope="request" /></p>
-	<p>商い：<bean:write name="resultForm" property="akinai" scope="request" /></p>
-	<p>学問：<bean:write name="resultForm" property="gakumon" scope="request" /></p>
+	<!-- 運勢結果表示 -->
+	<bean:write name="disp" scope="session"/>
+	<p>願い事：<bean:write name="resultForm" property="omikuji.negaigoto"/></p>
+	<p>商い：<bean:write name="resultForm" property="omikuji.akinai"/></p>
+	<p>商い：<bean:write name="resultForm" property="omikuji.gakumon" /></p>
 
 	<html:link action="/form">占いフォームに戻る</html:link>
 	<html:link action="/pastList">過去のおみくじ結果を見る</html:link>

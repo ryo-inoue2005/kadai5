@@ -1,11 +1,10 @@
 package form;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-import dto.PastListDto;
+import omikuji.Omikuji;
 
 /**
  * PastListFormクラス. <br>
@@ -16,20 +15,19 @@ import dto.PastListDto;
  */
 public class PastListForm extends ActionForm {
 
-	/** PastListDtoを格納するリスト */
-	private List<PastListDto> pastList = new ArrayList<>();
+	private List<Omikuji> listOmikuji;
 
 	/**
-	 * リストの取得
+	 * おみくじリストの取得
 	 */
-	public List<PastListDto> getPastList() {
-		return pastList;
+	public List<Omikuji> getListOmikuji() {
+		return listOmikuji;
 	}
 
 	/**
-	 * リストのセット
+	 * おみくじリストのセット
 	 */
-	public void setPastList(List<PastListDto> pastList) {
-		this.pastList = pastList;
+	public void setListOmikuji(List<Omikuji> listOmikuji) {
+		this.listOmikuji = listOmikuji;
 	}
 }

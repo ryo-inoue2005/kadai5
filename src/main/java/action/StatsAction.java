@@ -32,6 +32,7 @@ public class StatsAction extends Action {
 	 * @param request リクエスト
 	 * @param response レスポンス
 	 * @return フォワード先
+	 * @throws UnauthorizedAccessException 不正アクセス例外
 	 */
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,

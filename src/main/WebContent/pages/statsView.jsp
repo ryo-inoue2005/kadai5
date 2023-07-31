@@ -13,11 +13,12 @@
 </head>
 <body>
 
-	<h1>過去半年全体と比べた今日の運勢結果の割合</h1>
+	<h1>過去半年の運勢結果の割合</h1>
 	
 	<!-- 運勢結果を表示 -->
-	${sessionScope.disp}
+	<h1><bean:write name="disp" scope="session"/></h1>
 
+	<!-- 運勢の割合を表示 -->
 	<logic:iterate id="data" name="statsForm" property="statsMap">
 		<p>
 			<bean:write name="data" property="key" />

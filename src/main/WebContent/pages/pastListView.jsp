@@ -1,3 +1,4 @@
+<%@page import="omikuji.Omikuji"%>
 <%@page import="dto.PastListDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +18,8 @@
 
 
 
-	<h1>${sessionScope.birthday}の過去半年の結果</h1>
+	<!-- 過去半年の結果を表示 -->
+	<h1><bean:write name="birthday" scope="session"/>の過去半年の結果</h1>
 
 	<table border="5">
 		<tr>
@@ -28,8 +30,7 @@
 			<th>学問</th>
 		</tr>
 
-		<logic:iterate id="data" name="pastListForm" property="pastList"
-			type="PastListDto">
+		<logic:iterate id="data" name="pastListForm" property="listOmikuji" type="Omikuji">
 			<tr>
 				<td><bean:write name="data" property="createDate" /></td>
 				<td><bean:write name="data" property="unsei" /></td>

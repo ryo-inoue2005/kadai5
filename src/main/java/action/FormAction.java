@@ -36,9 +36,7 @@ public class FormAction extends Action {
 
 		// セッション初期化
 		HttpSession session = request.getSession();
-		session.removeAttribute("birthday");
-		session.removeAttribute("omikujiCode");
-		session.removeAttribute("disp");
+		session.invalidate();
 
 		return mapping.findForward("form");
 

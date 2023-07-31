@@ -69,11 +69,8 @@ public class ResultAction extends Action {
 		// おみくじを引く
 		Omikuji omikuji = getDao.drawOmikuji(omikujiCode);
 
-		// おみくじフォームに変換
-		omikujiForm.setDisp(omikuji.disp());
-		omikujiForm.setNegaigoto(omikuji.getNegaigoto());
-		omikujiForm.setAkinai(omikuji.getAkinai());
-		omikujiForm.setGakumon(omikuji.getGakumon());
+		// フォームにセット
+		omikujiForm.setOmikuji(omikuji);
 
 		HttpSession session = request.getSession();
 		// 誕生日をセッションに追加
