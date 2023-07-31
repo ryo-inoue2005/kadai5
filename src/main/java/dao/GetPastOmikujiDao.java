@@ -101,13 +101,12 @@ public class GetPastOmikujiDao {
 			dba.open();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT u.unsei_name , ROUND(CAST(CAST(COUNT(o.omikuji_code) as float) / ");
+			sql.append("SELECT u.unsei_name, ROUND(CAST(CAST(COUNT(r.omikuji_code) as float) / ");
 			sql.append("(SELECT COUNT(omikuji_code) FROM result) * 100 as numeric),1) as RATIO ");
 			sql.append("FROM unseimaster AS u ");
-			sql.append("INNER JOIN omikuji AS o ON u.unsei_code = o.unsei_code ");
-			sql.append("INNER JOIN result AS r ON o.omikuji_code = r.omikuji_code ");
-			sql.append("WHERE r.create_date ");
-			sql.append("BETWEEN ? AND CURRENT_DATE ");
+			sql.append("LEFT JOIN omikuji AS o ON u.unsei_code = o.unsei_code ");
+			sql.append("LEFT JOIN result AS r ON o.omikuji_code = r.omikuji_code ");
+			sql.append("AND r.create_date BETWEEN ? AND CURRENT_DATE ");
 			sql.append("GROUP BY u.unsei_name ");
 			sql.append("ORDER BY RATIO DESC ");
 
