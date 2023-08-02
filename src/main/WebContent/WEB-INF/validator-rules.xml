@@ -416,19 +416,20 @@
                    
                    	<!-- 存在する日付かチェック -->
                    	<!-- 先にisDateを実行します -->
-				<validator name="existsDate"
-					classname="validator.DateCheckValidator"
-					method="isExistsDateValidator"
-					methodParams="java.lang.Object,
-						org.apache.commons.validator.ValidatorAction,
-						org.apache.commons.validator.Field,
-						org.apache.struts.action.ActionMessages,
-						org.apache.commons.validator.Validator,
-						javax.servlet.http.HttpServletRequest"
-                   depends="isDate"
-                   msg="errors.existsdate"/>
-                 
-                
+                   
+                <validator name="existsDate"
+                		classname="validator.DateCheckValidator"
+                		method="isExistsDateValidator"
+                		methodParams="java.lang.Object,
+                			org.apache.commons.validator.ValidatorAction,
+                			org.apache.commons.validator.Field,
+                			org.apache.struts.action.ActionMessages,
+                			org.apache.commons.validator.Validator,
+                			javax.servlet.http.HttpServletRequest"
+                		depends="isDate"
+                		msg="errors.existsdate"/>
+               
+        
         <!--
           This simply allows struts to include the validateUtilities into a page, it should
           not be used as a validation rule.
