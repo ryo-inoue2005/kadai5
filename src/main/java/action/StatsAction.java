@@ -44,7 +44,7 @@ public class StatsAction extends Action {
 		GetPastOmikujiDao dao = new GetPastOmikujiDao();
 		statsForm.setStatsMap(dao.getLastSixMonthsStats());
 
-		return mapping.findForward("stats");
+		return mapping.findForward("success");
 	}
 
 }

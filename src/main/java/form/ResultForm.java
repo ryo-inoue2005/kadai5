@@ -1,13 +1,6 @@
 package form;
 
-import java.text.SimpleDateFormat;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
+import org.apache.struts.validator.ValidatorForm;
 
 import omikuji.Omikuji;
 
@@ -18,7 +11,7 @@ import omikuji.Omikuji;
  * @author Ryo.inoue
  * @version 1.00
  */
-public class ResultForm extends ActionForm {
+public class ResultForm extends ValidatorForm {
 
 	/** 誕生日を表します */
 	private String birthday;
@@ -60,32 +53,37 @@ public class ResultForm extends ActionForm {
 	 * @param request リクエスト
 	 * @return ActionErrors  アクションエラーオブジェクト
 	 */
-	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-
-		ActionErrors errors = new ActionErrors();
-
-		// 数値かどうかチェック
-		if (!birthday.matches("^[0-9]+$|-[0-9]+$")) {
-			errors.add("", new ActionMessage("errors.integer", "誕生日"));
-			return errors;
-		}
-
-		// 正しい形式かチェック
-		String fs = null;
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		try {
-			fs = df.format(df.parse(birthday));
-		} catch (Exception e) {
-			errors.add("", new ActionMessage("errors.invalid", "誕生日"));
-			return errors;
-		}
-
-		// 存在する日付かチェック
-		if (!birthday.equals(fs)) {
-			errors.add("", new ActionMessage("errors.existsdate", "誕生日"));
-			return errors;
-		}
-
-		return errors;
-	}
+//	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+//
+//		ActionErrors errors = new ActionErrors();
+//		
+//		if(birthday.equals("")) {
+//			errors.add("", new ActionMessage("errors.integer", "誕生日わん"));
+//			return errors;
+//		}
+//
+//		// 数値かどうかチェック
+//		if (!birthday.matches("^[0-9]+$|-[0-9]+$")) {
+//			errors.add("", new ActionMessage("errors.integer", "誕生日"));
+//			return errors;
+//		}
+//
+//		// 正しい形式かチェック
+//		String fs = null;
+//		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+//		try {
+//			fs = df.format(df.parse(birthday));
+//		} catch (Exception e) {
+//			errors.add("", new ActionMessage("errors.invalid", "誕生日"));
+//			return errors;
+//		}
+//
+//		// 存在する日付かチェック
+//		if (!birthday.equals(fs)) {
+//			errors.add("", new ActionMessage("errors.existsdate", "誕生日"));
+//			return errors;
+//		}
+//
+//		return errors;
+//	}
 }

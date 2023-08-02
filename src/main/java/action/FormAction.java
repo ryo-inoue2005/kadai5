@@ -38,7 +38,7 @@ public class FormAction extends Action {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		return mapping.findForward("form");
+		return mapping.findForward("success");
 
 	}
 

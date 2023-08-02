@@ -1,7 +1,6 @@
-<%@page import="omikuji.Omikuji"%>
-<%@page import="omikuji.Fortune"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="tiles"%>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
@@ -17,11 +16,14 @@
 
 	<h1>運勢結果</h1>
 	
-	<!-- 運勢結果表示 -->
-	<bean:write name="disp" scope="session"/>
+	<!-- Beanからomikujiオブジェクトを取得し、変数に代入 -->
+	<bean:define id="omikuji" name="resultForm" property="omikuji" type="omikuji.Omikuji" />
+	
+	<!-- 運勢結果表示(表示方法を残したい為、統一させていません) -->
+	${omikuji.disp()}
 	<p>願い事：<bean:write name="resultForm" property="omikuji.negaigoto"/></p>
 	<p>商い：<bean:write name="resultForm" property="omikuji.akinai"/></p>
-	<p>商い：<bean:write name="resultForm" property="omikuji.gakumon" /></p>
+	<p>商い：<bean:write name="resultForm" property="omikuji.gakumon" /></p> 
 
 	<html:link action="/form">占いフォームに戻る</html:link>
 	<html:link action="/pastList">過去のおみくじ結果を見る</html:link>

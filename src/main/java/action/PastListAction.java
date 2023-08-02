@@ -49,6 +49,6 @@ public class PastListAction extends Action {
 		GetPastOmikujiDao dao = new GetPastOmikujiDao();
 		pastListForm.setListOmikuji(dao.getLastSixMonthsList(birthday));
 
-		return mapping.findForward("pastList");
+		return mapping.findForward("success");
 	}
 }

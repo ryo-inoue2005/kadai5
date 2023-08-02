@@ -8,7 +8,7 @@ import omikuji.Omikuji;
 
 /**
  * PastListFormクラス. <br>
- * PastListFormクラスは、PastListDtoを格納するリストを保管します。
+ * PastListFormクラスは、Omikujiを格納するリストを保管します。
  *
  * @author Ryo.inoue
  * @version 1.00

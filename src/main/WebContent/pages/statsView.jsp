@@ -4,7 +4,6 @@
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="tiles"%>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
-<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html:html>
 <head>
@@ -12,11 +11,7 @@
 <title>過去半年の統計表示画面</title>
 </head>
 <body>
-
 	<h1>過去半年の運勢結果の割合</h1>
-	
-	<!-- 運勢結果を表示 -->
-	<h1><bean:write name="disp" scope="session"/></h1>
 
 	<!-- 運勢の割合を表示 -->
 	<logic:iterate id="data" name="statsForm" property="statsMap">

@@ -14,9 +14,6 @@
 <title>過去半年の結果リスト画面</title>
 </head>
 <body>
-
-
-
 	<!-- 過去半年の結果を表示 -->
 	<h1><bean:write name="birthday" scope="session"/>の過去半年の結果</h1>
 

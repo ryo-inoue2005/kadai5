@@ -66,21 +66,16 @@ public class ResultAction extends Action {
 			}
 		}
 
-		// おみくじを引く
+		// おみくじをを引き、フォームにセット
 		Omikuji omikuji = getDao.drawOmikuji(omikujiCode);
-
-		// フォームにセット
 		omikujiForm.setOmikuji(omikuji);
 
+		// おみくじコードと誕生日をセッションに追加
 		HttpSession session = request.getSession();
-		// 誕生日をセッションに追加
-		session.setAttribute("birthday", birthday);
-		// おみくじコードをセッションに追加
 		session.setAttribute("omikujiCode", omikujiCode);
-		// 運勢をセッションに追加
-		session.setAttribute("disp", omikuji.disp());
+		session.setAttribute("birthday", birthday);
 
-		return mapping.findForward("result");
+		return mapping.findForward("success");
 
 	}
 
